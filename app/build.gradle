@@ -1,6 +1,8 @@
 apply plugin: "com.android.application"
+apply plugin: "de.mannodermaus.android-junit5"
 apply plugin: "kotlin-android"
 apply plugin: "kotlin-android-extensions"
+apply plugin: "kotlin-kapt"
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION
@@ -19,16 +21,37 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
+    sourceSets {
+        main.java.srcDir "src/main/kotlin"
+        test.java.srcDir "src/test/kotlin"
+        androidTest.java.srcDir "src/androidTest/kotlin"
+    }
 }
 
 dependencies {
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$KOTLIN_VERSION"
-    implementation "com.android.support:appcompat-v7:26.1.0"
-    implementation "com.android.support.constraint:constraint-layout:1.0.2"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$KOTLIN_VERSION"
+    implementation "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
+    implementation "com.android.support.constraint:constraint-layout:$CONSTRAINT_LAYOUT_VERSION"
 
-    testImplementation "junit:junit:4.12"
+    implementation "io.reactivex.rxjava2:rxjava:$RXJAVA_VERSION"
+    implementation "io.reactivex.rxjava2:rxandroid:$RXANDROID_VERSION"
+    implementation "com.jakewharton.threetenabp:threetenabp:$THREETEN_ABP_VERSION"
 
-    androidTestImplementation("com.android.support.test.espresso:espresso-core:3.0.1", {
+    implementation "com.squareup.okhttp3:okhttp:$OKHTTP_VERSION"
+    implementation "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$RETROFIT_VERSION"
+    implementation "com.tickaroo.tikxml:retrofit-converter:$TIKXML_VERSION"
+    implementation "com.tickaroo.tikxml:annotation:$TIKXML_VERSION"
+    implementation "com.tickaroo.tikxml:core:$TIKXML_VERSION"
+    kapt "com.tickaroo.tikxml:processor:$TIKXML_VERSION"
+
+    implementation "com.google.dagger:dagger:$DAGGER_VERSION"
+    kapt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
+
+    testImplementation junit5()
+    testImplementation "junit:junit:$JUNIT4_VERSION"
+
+    androidTestImplementation("com.android.support.test.espresso:espresso-core:$ESPRESSO_VERSION", {
         exclude group: "com.android.support", module: "support-annotations"
     })
 }

@@ -23,6 +23,8 @@ android {
     }
     sourceSets {
         main.java.srcDir "src/main/kotlin"
+        debug.java.srcDir "src/debug/kotlin"
+        release.java.srcDir "src/release/kotlin"
         test.java.srcDir "src/test/kotlin"
         androidTest.java.srcDir "src/androidTest/kotlin"
     }
@@ -31,13 +33,17 @@ android {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$KOTLIN_VERSION"
     implementation "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
+    implementation "com.android.support:recyclerview-v7:$SUPPORT_LIBRARY_VERSION"
     implementation "com.android.support.constraint:constraint-layout:$CONSTRAINT_LAYOUT_VERSION"
 
     implementation "io.reactivex.rxjava2:rxjava:$RXJAVA_VERSION"
     implementation "io.reactivex.rxjava2:rxandroid:$RXANDROID_VERSION"
     implementation "com.jakewharton.threetenabp:threetenabp:$THREETEN_ABP_VERSION"
+    implementation "com.jakewharton.timber:timber:$TIMBER_VERSION"
+    implementation "com.annimon:stream:$ANNIMON_STREAM_VERSION"
 
     implementation "com.squareup.okhttp3:okhttp:$OKHTTP_VERSION"
+    implementation "com.squareup.okhttp3:logging-interceptor:$OKHTTP_VERSION"
     implementation "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$RETROFIT_VERSION"
     implementation "com.tickaroo.tikxml:retrofit-converter:$TIKXML_VERSION"
@@ -45,11 +51,18 @@ dependencies {
     implementation "com.tickaroo.tikxml:core:$TIKXML_VERSION"
     kapt "com.tickaroo.tikxml:processor:$TIKXML_VERSION"
 
+    implementation "net.grandcentrix.thirtyinch:thirtyinch:$THIRTY_INCH_VERSION"
+    implementation "net.grandcentrix.thirtyinch:thirtyinch-rx2:$THIRTY_INCH_VERSION"
+    implementation "net.grandcentrix.thirtyinch:thirtyinch-logginginterceptor:$THIRTY_INCH_VERSION"
+    implementation "net.grandcentrix.thirtyinch:thirtyinch-plugin:$THIRTY_INCH_VERSION"
+    implementation "com.pascalwelsch.compositeandroid:activity:$COMPOSITE_ANDROID_VERSION"
+    implementation "com.pascalwelsch.compositeandroid:fragment:$COMPOSITE_ANDROID_VERSION"
     implementation "com.google.dagger:dagger:$DAGGER_VERSION"
     kapt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
 
     testImplementation junit5()
     testImplementation "junit:junit:$JUNIT4_VERSION"
+    testCompileOnly "de.mannodermaus.gradle.plugins:android-junit5-embedded-runtime:$JUNIT5_PLUGIN_VERSION"
 
     androidTestImplementation("com.android.support.test.espresso:espresso-core:$ESPRESSO_VERSION", {
         exclude group: "com.android.support", module: "support-annotations"

@@ -9,6 +9,10 @@ open class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
+        // One-Time Initialization
+        appComponent.logInitializer().init(this)
+        appComponent.timeInitializer().init(this)
     }
 
     protected fun createComponent(): AppComponent =
